@@ -26,7 +26,7 @@ _quick install:_
 
 ```bash
 # clone
-git clone https://github.com/sueszli/autodiff
+git clone https://github.com/sueszli/k-means
 cd autodiff
 
 # install dependencies
