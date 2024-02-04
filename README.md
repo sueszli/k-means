@@ -37,7 +37,8 @@ pip3 install pipreqs > /dev/null && rm -rf requirements.txt > /dev/null && pipre
 pip3 install -r requirements.txt > /dev/null
 
 # run
-...
+python3 k-means.py
+
 
 << ////
 ...
