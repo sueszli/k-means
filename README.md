@@ -12,8 +12,8 @@ python3 -m pip install --upgrade pip > /dev/null
 pip3 install pipreqs > /dev/null && rm -rf requirements.txt > /dev/null && pipreqs . > /dev/null
 pip3 install -r requirements.txt > /dev/null
 
-# run unit tests
-python3 k-means.py
+# run
+...
 
 << ////
 ...
