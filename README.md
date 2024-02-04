@@ -32,9 +32,9 @@ cd k-means
 # install dependencies
 if ! command -v python3 &>/dev/null; then echo "python3 is not installed."; return; fi
 if ! command -v pip3 &>/dev/null; then echo "pip3 is not installed."; return; fi
-python3 -m pip install --upgrade pip > /dev/null
-pip3 install pipreqs > /dev/null && rm -rf requirements.txt > /dev/null && pipreqs . > /dev/null
-pip3 install -r requirements.txt > /dev/null
+python3 -m pip install --upgrade pip
+pip3 install pipreqs && rm -rf requirements.txt && pipreqs .
+pip3 install -r requirements.txt
 
 # run
 python3 k-means.py
