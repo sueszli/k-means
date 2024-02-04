@@ -1,18 +1,22 @@
-the K-means clustering algorithm is a simple unsupervised learning algorithm. it receives unlabeled data samples as input and its goal is to cluster them into K groups, based on their similarities / how close they are to each other.
+_"k-means" clustering algorithm:_
 
-it works by first randomly assigning coordinates (locations) of the centers of clusters (called centroids). then the algorithm goes over each sample in the dataset and calculates the distance between each sample to each centroid. each sample is assigned to the cluster of its closest centroid. then the coordinates of the clusters are updated based on the mean location of the data points that were assigned to the cluster. then we repeat the whole process until the cluster centroids become stable.
+- unsupervised learning: no labels
+- partitioning clustering: each sample is assigned to one cluster, without overlapping
+- dataset: scikit-learn's iris samples
 
-1. first, choose an integer value and assign it to the variable K. this variable represents the number of clusters you want to have.
-2. randomly choose initial coordinates for the K clusters.
-3. for each data point calculate the distance between the data point and each centroid.
-4. the data point gets assigned to the cluster of the closest centroid.
-5. after each data point is assigned to a cluster we update the centroids to be now located at the mean position of the cluster that is associated with that centroid.
-6. repeat until cluster centroids become stable (or other criteria).
+_implementation:_
+
+1. select the number of clusters, $k$.
+2. place $k$ random vectors in the space of the data points, called "centroids".
+3. calculate the distance between every data point and centroid.
+4. assign each data point to the cluster of the closest centroid, forming $k$ clusters.
+5. update the position of the centroids. set them to the average position of the data points in the cluster.
+6. repeat until the centroids stop moving (or some other criteria).
 
 ```
-┌───────────────────────────────────────────────┐
-| honestly, i still don't know what k means ... |
-└───────────────────────────────────────────────┘
+┌──────────────────────────────────────––––───────–––––┐
+| honestly, i still don't know what 'k' means ... hehe |
+└────────────────────────────────────––──––───────–––––┘
     \
      \
       \       _.-.
@@ -28,7 +32,6 @@ it works by first randomly assigning coordinates (locations) of the centers of c
                       \_|/
                      __|||
                      >__/'
-
 ```
 
 <br>

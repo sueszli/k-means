@@ -1,5 +1,0 @@
-# assignment
-
-your goal is the implement the K-means clustering algorithm and run it with three clusters (`K=3`) on the two features with `sepal_length` and `sepal_width`.
-
-specifically, you task is to define a function called `kmeans_clustering` that takes as input a the data to be clustered and the number of clusters you want to have at the end. within the function you implement the algorithm described above. at the end the function should return the two variables `k_labels` represententing the cluster each point is assigned to. this means that this variable should have the same number of elements as the data and each element is one integer that represent one of the clusters. the second variable that should be returned by the function is `k_centroids` which represents the coordinates (locations) of the centers of the clusters. this means that we have K=3, then there will be 3 points each having two values representing the two features of sepal_length and sepal_width. to calculate the distance between a data point and each centroid you may (but you don't have to) use the function in the cell below.
