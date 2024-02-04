@@ -15,7 +15,7 @@ _implementation:_
 
 2. place $k$ random vectors in the space of the data points, called "centroids".
 
-   there are many ways to initialize the centroids. the ["forgy method"](https://people.csail.mit.edu/tieu/notebook/kmeans/15_p600-hamerly.pdf) delivers the best results in practice - but there are more sophisticated methods like ["k-means++"](https://en.m.wikipedia.org/wiki/K-means%2B%2B).
+   there are many ways to initialize the centroids. the ["forgy method"](https://people.csail.mit.edu/tieu/notebook/kmeans/15_p600-hamerly.pdf) is a simple heuristic but ["k-means++"](https://en.m.wikipedia.org/wiki/K-means%2B%2B) delivers better results.
 
 3. calculate the distance between every data point and centroid (i.e. some euclidean distance).
 
