@@ -13,7 +13,7 @@ pip3 install pipreqs > /dev/null && rm -rf requirements.txt > /dev/null && pipre
 pip3 install -r requirements.txt > /dev/null
 
 # run unit tests
-python3 kmeans.py
+python3 k-means.py
 
 << ////
 ...
