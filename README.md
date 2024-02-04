@@ -7,6 +7,8 @@ _k-means clustering algorithm:_
 
   a naive k-3 implementation [usually fails](https://en.m.wikipedia.org/wiki/K-means_clustering#:~:text=the%20result%20often%20fails) but we're doing it anyway out of tradition. in practice, we would use [`sklearn.cluster.KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) and more sophisticated methods anyway.
 
+<br><br>
+
 _implementation:_
 
 1. select the number of clusters, $k$.
@@ -48,7 +50,7 @@ _implementation:_
                      >__/'
 ```
 
-<br>
+<br><br>
 
 _quick install:_
 
