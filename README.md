@@ -1,4 +1,4 @@
-_"k-means" clustering algorithm:_
+_k-means clustering algorithm:_
 
 - unsupervised learning: no labels.
 - partitioning clustering: each sample is assigned to one cluster, without overlapping.
