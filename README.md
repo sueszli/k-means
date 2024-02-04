@@ -27,7 +27,7 @@ _quick install:_
 ```bash
 # clone
 git clone https://github.com/sueszli/k-means
-cd autodiff
+cd k-means
 
 # install dependencies
 if ! command -v python3 &>/dev/null; then echo "python3 is not installed."; return; fi
