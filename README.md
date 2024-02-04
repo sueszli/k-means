@@ -5,7 +5,9 @@ _k-means clustering algorithm:_
 - np-hard problem: no known polynomial time algorithm, but we try to approximate it through iterative refinement.
 - dataset: scikit-learn's iris dataset with 3 species (therefore $k=3$).
 
-  a naive k3 implementation with this dataset [usually fails](https://en.m.wikipedia.org/wiki/K-means_clustering#:~:text=the%20result%20often%20fails) but we're doing it anyway out of tradition. in practice, we would use [`sklearn.cluster.KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) and more sophisticated methods anyway.
+  a naive k3 implementation with this dataset [usually fails](https://en.m.wikipedia.org/wiki/K-means_clustering#:~:text=the%20result%20often%20fails) but we're doing it anyway out of tradition.
+
+- measured against: [`sklearn.cluster.KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
 
 <br><br>
 
