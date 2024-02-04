@@ -1,8 +1,15 @@
-import np
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
 import os
 import unittest
 
 from sklearn import datasets
+
+
+# https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1
 
 sepal_data = datasets.load_iris()
 # sepal_length =
@@ -44,6 +51,8 @@ if __name__ == "__main__":
     os.system("uname -a") if os.name == "posix" else os.system("systeminfo")
 
     k = 3
+
+    # forgy method: pick random data points as initial centroids
 
     # run unit tests
     unittest.main()
