@@ -1,47 +1,43 @@
-import pandas as pd
+from sklearn import datasets
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
 
 import os
 import unittest
 
-from sklearn import datasets
+
+def get_dataset():
+    iris = datasets.load_iris()
+    sepal_length = iris.data[:, 0]  # type: ignore
+    sepal_width = iris.data[:, 1]  # type: ignore
+    data = np.array(list(zip(sepal_length, sepal_width)))
+
+    k = len(iris.target_names)  # type: ignore
+    return data, k
 
 
-# https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1
+def get_next_centroids(data: np.ndarray, centr: np.ndarray):
+    # d2c[i]=j means data[i] is closest to centr[j]
+    d2c = np.zeros(data.shape[0], dtype=int) - 1
+    for i, d in enumerate(data):
+        all_distances = np.linalg.norm(centr - d, axis=1)
+        min_distance_index = np.argmin(all_distances)
+        d2c[i] = min_distance_index
 
-sepal_data = datasets.load_iris()
-# sepal_length =
-# sepal_width =
+    # new_centr[j] is the real centroid for all data closest to centr[j]
+    new_centr = np.zeros(centr.shape)
+    for j in range(centr.shape[0]):
+        group = data[d2c == j]
+        if not len(group) > 0:
+            continue
+        new_centr[j] = np.mean(group, axis=0)
 
-
-def calculate_distances(point, centroids):
-    # two features `sepal_length` and `sepal_width`
-
-    # takes as input a the data to be clustered and the number of clusters you want to have at the end.
-    """
-    Calculate the Euclidean distances between a point and a list of centroids.
-
-    Parameters:
-    - point (numpy.ndarray): A numpy array representing the coordinates of a point.
-    - centroids (numpy.ndarray): A numpy array representing the coordinates of the centroids.
-
-    Returns:
-    - distances (numpy.ndarray): A numpy array containing the Euclidean distances between the point and each centroid.
-
-    This function computes the Euclidean distance between the given point and each centroid in the set of centroids.
-    The Euclidean distance between two points in n-dimensional space is defined as the square root of the sum of the squared differences between the corresponding coordinates of the points.
-    """
-    # return np.sqrt((point - centroids) ** 2).sum(axis=1)
-
-    # at the end the function should return the two variables `k_labels` represententing the cluster each point is assigned to. this means that this variable should have the same number of elements as the data and each element is one integer that represent one of the clusters. the second variable that should be returned by the function is `k_centroids` which represents the coordinates (locations) of the centers of the clusters. this means that we have K=3, then there will be 3 points each having two values representing the two features of sepal_length and sepal_width. to calculate the distance between a data point and each centroid you may (but you don't have to) use the function in the cell below.
-
-    pass
+    return d2c, new_centr
 
 
 class TestCases(unittest.TestCase):
-
+    # https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1
+    # run with: unittest.main()
     # compare against `sklearn.cluster.KMeans`
     def test_1(self):
         self.assertTrue(True)
@@ -50,11 +46,16 @@ class TestCases(unittest.TestCase):
 if __name__ == "__main__":
     # clear screen
     os.system("cls" if os.name == "nt" else "clear")
-    os.system("uname -a") if os.name == "posix" else os.system("systeminfo")
 
-    k = 3
+    data, k = get_dataset()
+    old_centr = data[np.random.choice(data.shape[0], k, replace=False)]  # forgy method for initialization
 
-    # forgy method: pick random data points as initial centroids
+    d2c, new_centr = get_next_centroids(data, old_centr)
 
-    # run unit tests
-    unittest.main()
+    # max_iterations = 1
+    # for iter in range(max_iterations):
+    #     new_centr = get_next_centroids(data, centr)
+    #     has_converged = np.array_equal(centr, new_centr)
+    #     if has_converged:
+    #         break
+    #     centr = new_centr
