@@ -41,6 +41,8 @@ def calculate_distances(point, centroids):
 
 
 class TestCases(unittest.TestCase):
+
+    # compare against `sklearn.cluster.KMeans`
     def test_1(self):
         self.assertTrue(True)
 
