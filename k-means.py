@@ -4,8 +4,6 @@ from sklearn import cluster
 import numpy as np
 import matplotlib.pyplot as plt
 
-import os
-
 
 def get_dataset() -> tuple[np.ndarray, int]:
     iris = datasets.load_iris()
@@ -15,11 +13,6 @@ def get_dataset() -> tuple[np.ndarray, int]:
 
     k = len(iris.target_names)  # type: ignore
     return data, k
-
-
-def get_initial_centroids(data: np.ndarray, k: int) -> np.ndarray:
-    # forgy method: choose k random data points
-    return data[np.random.choice(data.shape[0], k, replace=False)]
 
 
 def update_centroids(data: np.ndarray, centroids: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -40,46 +33,34 @@ def update_centroids(data: np.ndarray, centroids: np.ndarray) -> tuple[np.ndarra
     return d2c, new_centroids
 
 
-def log(iter: int, centroids: np.ndarray, new_centroids: np.ndarray) -> None:
-    out = f"\033[92miteration {str(iter+1).zfill(2)}:\033[0m "
-    centroids_str = ",".join([f"({x:.2f},{y:.2f})" for x, y in centroids])
-    new_centroids_str = ",".join([f"({x:.2f},{y:.2f})" for x, y in new_centroids])
-    out += f"old=[{centroids_str}], new=[{new_centroids_str}]"
-    print(out)
-
-
-def plot_result(data: np.ndarray, d2c: np.ndarray, centroids: np.ndarray):
-    colors = ["r", "g", "b", "y", "c", "m"]
-    for i, d in enumerate(data):
-        plt.scatter(d[0], d[1], c=colors[d2c[i]])
-    for c in centroids:
-        plt.scatter(c[0], c[1], c="black", marker="x")
-    plt.show()
-
-
 def run(data: np.ndarray, k: int, max_iterations: int, log_steps=False, plot_res=False):
-    # update centroids until convergence
-    centroids = get_initial_centroids(data, k)
+    initial_centroids = data[np.random.choice(data.shape[0], k, replace=False)]  # forgy method: choose k random data points
+
+    centroids = initial_centroids
     d2c = np.zeros(data.shape[0], dtype=int) - 1
 
     for iter in range(max_iterations):
         d2c, new_centroids = update_centroids(data, centroids)
         has_converged = np.array_equal(centroids, new_centroids)
 
-        log(iter, centroids, new_centroids) if log_steps else None
+        if log_steps:
+            print(f"\033[92miteration {str(iter+1).zfill(2)}:\033[0m old=[{','.join([f'({x:.2f},{y:.2f})' for x, y in centroids])}], new=[{','.join([f'({x:.2f},{y:.2f})' for x, y in new_centroids])}]")
         if has_converged:
             print(f"converged in {iter+1} iterations") if log_steps else None
             break
 
         centroids = new_centroids
 
-    plot_result(data, d2c, centroids) if plot_res else None
+    if plot_res:
+        colors = ["r", "g", "b", "y", "c", "m"]
+        (plt.scatter(d[0], d[1], c=colors[d2c[i]]) for i, d in enumerate(data))
+        (plt.scatter(c[0], c[1], c="black", marker="x") for c in centroids)
+        plt.show()
     return d2c, centroids
 
 
 if __name__ == "__main__":
-    os.system("cls" if os.name == "nt" else "clear")
-
+    round_to = 2
     c_diff = 0
     d_diff = 0
 
@@ -89,7 +70,7 @@ if __name__ == "__main__":
         # 1. get dataset
         data, k = get_dataset()
 
-        # 2. run lib
+        # 2. run lib implementation
         lib = cluster.KMeans(n_clusters=k).fit(data)
         lib_centroids = lib.cluster_centers_
         lib_d2c = lib.labels_
@@ -101,10 +82,9 @@ if __name__ == "__main__":
 
         # 4. compare results
         assert len(lib_centroids) == len(centroids)
-        diff = np.linalg.norm(lib_centroids - centroids).round(4)
-        print(f"centroid difference: {diff}")
+        diff = np.linalg.norm(lib_centroids - centroids)
+        print(f"centroid difference: {diff.round(round_to)}")
         c_diff += float(diff)
-
         assert len(lib_d2c) == len(d2c)
         d2c_diff = 0
         for i in range(len(d2c)):
@@ -113,6 +93,6 @@ if __name__ == "__main__":
         print(f"d2c difference: {d2c_diff}\n")
         d_diff += d2c_diff
 
-    print(f"results averaged over {num_benchmarks} benchmarks")
-    print(f"\t- \033[92mcentroid difference:\033[0m {c_diff/num_benchmarks}")
-    print(f"\t- \033[92md2c difference:\033[0m {d_diff/num_benchmarks}")
+    print(f"results averaged over {num_benchmarks} benchmarks:")
+    print(f"\t- centroid difference: {round(c_diff/num_benchmarks, round_to)}")
+    print(f"\t- d2c difference: {round(d_diff/num_benchmarks, round_to)}")
