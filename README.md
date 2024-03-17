@@ -42,7 +42,7 @@ _implementation:_
 
    k-means is sensitive to the initial placement of the centroids. the ["forgy method"](https://people.csail.mit.edu/tieu/notebook/kmeans/15_p600-hamerly.pdf) is simple and effective but ["k-means++"](https://en.m.wikipedia.org/wiki/K-means%2B%2B) is the more sophisticated approach.
 
-3. calculate the distance between every data point and centroid (i.e. some kind of euclidean distance).
+3. calculate the distance between every data point and centroid (i.e. euclidean distance).
 
 4. assign each data point to the cluster of the closest centroid, forming $k$ clusters.
 
