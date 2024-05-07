@@ -21,7 +21,7 @@
 
 <br><br>
 
-_k-means clustering algorithm:_
+_k-means:_
 
 - unsupervised learning: no labels.
 - partitioning clustering: each sample is assigned to one cluster, without overlapping.
@@ -34,7 +34,7 @@ _k-means clustering algorithm:_
 
 <br><br>
 
-_implementation:_
+_algorithm:_
 
 1. select the number of clusters, $k$.
 
