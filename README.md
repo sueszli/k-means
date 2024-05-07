@@ -19,20 +19,7 @@
                      >__/'
 ```
 
-<br><br>
-
-_k-means:_
-
-- unsupervised learning: no labels.
-- partitioning clustering: each sample is assigned to one cluster, without overlapping.
-- np-hard problem: no known polynomial time algorithm, but we try to approximate it through iterative refinement.
-- dataset: scikit-learn's iris dataset with 3 species (therefore $k=3$).
-
-  beware: a naive k3 implementation with this dataset [usually fails](https://en.m.wikipedia.org/wiki/K-means_clustering#:~:text=the%20result%20often%20fails) but we're doing it anyway out of tradition.
-
-- test: we compare the results with scikit-learn's default k-means implementation.
-
-<br><br>
+k-means clustering is an unsupervised learning algorithm, meaning it works with unlabeled data. it's a partitioning clustering method where each data point definitively belongs to a single cluster. finding the optimal solution in k-means is an np-hard problem, so we use iterative refinement to get a good approximation. for this example, we'll use the classic iris dataset, even though naive implementations of k-means often fail due to the dataset's characteristics. since the iris dataset has three flower species, we'll aim for three clusters (k=3). finally, we'll compare our results to the standard k-means implementation in scikit-learn.
 
 _algorithm:_
 
@@ -51,23 +38,3 @@ _algorithm:_
 6. repeat until the centroids stop moving (or some other criteria).
 
    avoid local minima by running the algorithm multiple times with different initializations.
-
-<br><br>
-
-_quick install:_
-
-```bash
-# clone
-git clone https://github.com/sueszli/k-means
-cd k-means
-
-# install dependencies
-if ! command -v python3 &>/dev/null; then echo "python3 is not installed."; return; fi
-if ! command -v pip3 &>/dev/null; then echo "pip3 is not installed."; return; fi
-python3 -m pip install --upgrade pip
-pip3 install pipreqs && rm -rf requirements.txt && pipreqs .
-pip3 install -r requirements.txt
-
-# run
-python3 k-means.py
-```
