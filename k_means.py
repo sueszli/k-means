@@ -1,3 +1,21 @@
+"""
+1. select the number of clusters, $k$.
+
+2. place $k$ random vectors in the space of the data points, called "centroids".
+
+   k-means is sensitive to the initial placement of the centroids. the ["forgy method"](https://people.csail.mit.edu/tieu/notebook/kmeans/15_p600-hamerly.pdf) is simple and effective but ["k-means++"](https://en.m.wikipedia.org/wiki/K-means%2B%2B) is the more sophisticated approach.
+
+3. calculate the distance between every data point and centroid (i.e. euclidean distance).
+
+4. assign each data point to the cluster of the closest centroid, forming $k$ clusters.
+
+5. update the position of the centroids. set them to the average position of the data points in the cluster.
+
+6. repeat until the centroids stop moving (or some other criteria).
+
+   avoid local minima by running the algorithm multiple times with different initializations.
+"""
+
 from sklearn import datasets
 from sklearn import cluster
 
